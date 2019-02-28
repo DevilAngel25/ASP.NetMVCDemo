@@ -6,6 +6,8 @@ using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.Google;
 using Owin;
 using ASP.NetMVCDemo.Models;
+using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.Twitter;
 
 namespace ASP.NetMVCDemo
 {
@@ -50,19 +52,34 @@ namespace ASP.NetMVCDemo
             //    clientId: "",
             //    clientSecret: "");
 
-            //app.UseTwitterAuthentication(
-            //   consumerKey: "xRsAs9l8g7JNjyVodFymS3wiS",
-            //   consumerSecret: "JK1Oa0EomYwzNq8oJRtj27xujvcvEf1rMtMsL5y4cAtlAuZSUN");
+            /*app.UseTwitterAuthentication(new TwitterAuthenticationOptions
+            {
+                ConsumerKey = "izFWs7sLVEj9Rh3KXlzKnWfpU",
+                ConsumerSecret = "YcfUbBqObFIg01leOrsk92UeJ1wkz2jEiCQJbqmmZWHMFdVnrN",
+                BackchannelCertificateValidator = new CertificateSubjectKeyIdentifierValidator(new[]
+                {
+                    "A5EF0B11CEC04103A34A659048B21CE0572D7D47", // VeriSign Class 3 Secure Server CA - G2
+                    "0D445C165344C1827E1D20AB25F40163D8BE79A5", // VeriSign Class 3 Secure Server CA - G3
+                    "7FD365A7C2DDECBBF03009F34339FA02AF333133", // VeriSign Class 3 Public Primary Certification Authority - G5
+                    "39A55D933676616E73A761DFA16A7E59CDE66FAD", // Symantec Class 3 Secure Server CA - G4
+                    "5168FF90AF0207753CCCD9656462A212B859723B", //DigiCert SHA2 High Assurance Server C‎A 
+                    "B13EC36903F8BF4701D498261A0802EF63642BC3" //DigiCert High Assurance EV Root CA
+                })
+            });*/
 
-            //app.UseFacebookAuthentication(
-            //   appId: "",
-            //   appSecret: "");
+            app.UseTwitterAuthentication(
+               consumerKey: "OfPa2bOOLiC847AzGUDhvmoGe",
+               consumerSecret: "sBW6rYQmIS7d6zWU4CUJUVqLcbP3IIe39pP2L7JTNZ2dE808cg");
 
-            //app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
-            //{
-            //    ClientId = "",
-            //    ClientSecret = ""
-            //});
+            app.UseFacebookAuthentication(
+               appId: "307001989959541",
+               appSecret: "716ea68b670daa9f836f8cd040a8850a");
+
+            app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
+            {
+                ClientId = "74573038795-p1aabij935cmne6tth5kolkg0td6kh54.apps.googleusercontent.com",
+                ClientSecret = "4Ex1e58d8u5DjWj6K1o32j7H"
+            });
         }
     }
 }

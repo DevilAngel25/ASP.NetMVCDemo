@@ -51,8 +51,8 @@ namespace ASP.NetMVCDemo
             //    clientSecret: "");
 
             //app.UseTwitterAuthentication(
-            //   consumerKey: "",
-            //   consumerSecret: "");
+            //   consumerKey: "xRsAs9l8g7JNjyVodFymS3wiS",
+            //   consumerSecret: "JK1Oa0EomYwzNq8oJRtj27xujvcvEf1rMtMsL5y4cAtlAuZSUN");
 
             //app.UseFacebookAuthentication(
             //   appId: "",

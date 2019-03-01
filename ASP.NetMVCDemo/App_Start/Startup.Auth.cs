@@ -8,6 +8,7 @@ using Owin;
 using ASP.NetMVCDemo.Models;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Twitter;
+using System.Configuration;
 
 namespace ASP.NetMVCDemo
 {
@@ -49,21 +50,21 @@ namespace ASP.NetMVCDemo
 
             // Uncomment the following lines to enable logging in with third party login providers
             app.UseMicrosoftAccountAuthentication(
-                clientId: "d3730afc-d004-45ac-b11a-a5c291ebbfd7",
-                clientSecret: "regxxBIQF5498|{xqJXP3?;");
+                clientId: ConfigurationManager.AppSettings["MicrosoftClientID"],
+                clientSecret: ConfigurationManager.AppSettings["MicrosoftClientSecret"]);
 
             app.UseTwitterAuthentication(
-               consumerKey: "OfPa2bOOLiC847AzGUDhvmoGe",
-               consumerSecret: "sBW6rYQmIS7d6zWU4CUJUVqLcbP3IIe39pP2L7JTNZ2dE808cg");
+               consumerKey: ConfigurationManager.AppSettings["TwitterClientID"],
+               consumerSecret: ConfigurationManager.AppSettings["TwitterClientSecret"]);
 
             app.UseFacebookAuthentication(
-               appId: "307001989959541",
-               appSecret: "716ea68b670daa9f836f8cd040a8850a");
+               appId: ConfigurationManager.AppSettings["FacebookClientID"],
+               appSecret: ConfigurationManager.AppSettings["FacebookClientSecret"]);
 
             app.UseGoogleAuthentication(new GoogleOAuth2AuthenticationOptions()
             {
-                ClientId = "74573038795-p1aabij935cmne6tth5kolkg0td6kh54.apps.googleusercontent.com",
-                ClientSecret = "4Ex1e58d8u5DjWj6K1o32j7H"
+                ClientId = ConfigurationManager.AppSettings["GoogleClientID"],
+                ClientSecret = ConfigurationManager.AppSettings["GoogleClientSecret"]
             });
         }
     }

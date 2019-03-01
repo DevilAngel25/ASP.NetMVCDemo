@@ -1,10 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Data.Entity;
-using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
-using System.Web;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
@@ -16,15 +12,49 @@ using Twilio;
 using Twilio.Types;
 using System.Diagnostics;
 using Twilio.Rest.Api.V2010.Account;
+using SendGrid.Helpers.Mail;
+using System.Net;
+using SendGrid;
 
 namespace ASP.NetMVCDemo
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSendGridasync(message);
+        }
+
+        // Use NuGet to install SendGrid (Basic C# client lib) 
+        private async Task configSendGridasync(IdentityMessage message)
+        {
+
+            /*var apiKey = "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";
+            var client = new SendGridClient(apiKey);
+            var from = new EmailAddress("test@example.com", "Example User");
+            var subject = "Sending with SendGrid is Fun";
+            var to = new EmailAddress("lloydfitzroysmith@googlemail.com", "Example User");
+            var plainTextContent = "and easy to do anywhere, even with C#";
+            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
+            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
+            var response = await client.SendEmailAsync(msg);*/
+
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("ASP.NetMVC@Demo.com", "Voxel Smith"),
+                Subject = message.Subject,
+                PlainTextContent = message.Body,
+                HtmlContent = message.Body
+            };
+            msg.AddTo(new EmailAddress(message.Destination));
+
+            msg.SetClickTracking(true, true);
+
+            // Create a Web transport for sending email.
+            var apiKey = ConfigurationManager.AppSettings["SendGridKey"];
+            var client = new SendGridClient(apiKey);
+
+            var response = await client.SendEmailAsync(msg);
         }
     }
 

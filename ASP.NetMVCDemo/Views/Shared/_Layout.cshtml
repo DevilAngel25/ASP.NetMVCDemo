@@ -32,6 +32,16 @@
                     </li>
                     <li class="nav-item">@Html.ActionLink("About", "About", "Home", new { area = "" }, new { @class = "nav-link" })</li>
                     <li class="nav-item">@Html.ActionLink("Contact", "Contact", "Home", new { area = "" }, new { @class = "nav-link" })</li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Client
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            @Html.ActionLink("View Clients", "ViewClient", "Client", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Add Client", "AddClient", "Client", new { area = "" }, new { @class = "dropdown-item" })
+                            @Html.ActionLink("Edit Client", "EditClient", "Client", new { area = "" }, new { @class = "dropdown-item" })
+                        </div>
+                    </li>
                 </ul>
                 <div class="navbar-collapse collapse justify-content-end">
                     @Html.Partial("_LoginPartial")

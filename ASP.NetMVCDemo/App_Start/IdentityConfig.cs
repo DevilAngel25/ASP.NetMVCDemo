@@ -22,23 +22,12 @@ namespace ASP.NetMVCDemo
     {
         public async Task SendAsync(IdentityMessage message)
         {
-            await configSendGridasync(message);
+            await ConfigSendGridasync(message);
         }
 
         // Use NuGet to install SendGrid (Basic C# client lib) 
-        private async Task configSendGridasync(IdentityMessage message)
+        private async Task ConfigSendGridasync(IdentityMessage message)
         {
-
-            /*var apiKey = "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";
-            var client = new SendGridClient(apiKey);
-            var from = new EmailAddress("test@example.com", "Example User");
-            var subject = "Sending with SendGrid is Fun";
-            var to = new EmailAddress("lloydfitzroysmith@googlemail.com", "Example User");
-            var plainTextContent = "and easy to do anywhere, even with C#";
-            var htmlContent = "<strong>and easy to do anywhere, even with C#</strong>";
-            var msg = MailHelper.CreateSingleEmail(from, to, subject, plainTextContent, htmlContent);
-            var response = await client.SendEmailAsync(msg);*/
-
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("ASP.NetMVC@Demo.com", "Voxel Smith"),
@@ -114,7 +103,7 @@ namespace ASP.NetMVCDemo
             // Configure user lockout defaults
             manager.UserLockoutEnabledByDefault = true;
             manager.DefaultAccountLockoutTimeSpan = TimeSpan.FromMinutes(5);
-            manager.MaxFailedAccessAttemptsBeforeLockout = 5;
+            manager.MaxFailedAccessAttemptsBeforeLockout = 3;
 
             // Register two factor authentication providers. This application uses Phone and Emails as a step of receiving a code for verifying the user
             // You can write your own provider and plug it in here.
